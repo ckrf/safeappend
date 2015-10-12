@@ -2,5 +2,3 @@
 *.dta
 *.tmp
 
-# dofile for creating test sets
-demo_dta.do
