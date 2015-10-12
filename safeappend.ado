@@ -47,7 +47,7 @@ tempfile usingvars
 postfile `postvars' str32 varname str7 usingtype using `usingvars'
 
 * loop and post
-use `using'
+use "`using'"
 local usingtype "" // string or numeric
 foreach var of varlist _all {
     capture confirm numeric variable `var'
@@ -90,7 +90,7 @@ do `tostring_master'
 save `master_safe'
 
 tempfile using_safe
-use `using', clear
+use "`using'", clear
 do `tostring_using'
 save `using_safe'
 
