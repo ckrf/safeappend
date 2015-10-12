@@ -2,38 +2,16 @@
 * append_post.do: test an approach to safely appending
 *
 
-pause on
-
-/*  -------------------------
-    First make the datasets that we'll use
-    ------------------------- */
-
-tempfile master using 
-set obs 5
-gen id = _n 
-gen foo = 1 
-gen bar = 3.14
-gen baz = "14 July"
-save `master'
-
-clear 
-set obs 5
-gen id = _n + 5
-gen foo = "One"
-gen bar = 2.17
-gen baz = 0714
-save `using'
+program define safeappend
+    args using
 
 * -- config -- *
-*local master ""
-*local using ""
+local master `c(filename)'
 * -- end config -- *
-
 
 /*  -------------------------
     Loop over master dataset and post varnames and types
     ------------------------- */
-
 * postfile config 
 tempname postvars
 tempfile mastervars 
@@ -120,3 +98,5 @@ save `using_safe'
     ------------------------- */
 use `master_safe'
 append using `using_safe'
+
+end
