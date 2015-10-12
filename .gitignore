@@ -1,0 +1,6 @@
+# Stata files and tempfiles
+*.dta
+*.tmp
+
+# dofile for creating test sets
+demo_dta.do
