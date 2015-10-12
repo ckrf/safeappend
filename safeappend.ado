@@ -5,9 +5,10 @@
 program define safeappend
     args using
 
-* -- config -- *
-local master `c(filename)'
-* -- end config -- *
+* -- save current state -- *
+    // TODO: make this safer using tempname, etc properly
+tempfile master
+save `master'
 
 /*  -------------------------
     Loop over master dataset and post varnames and types
