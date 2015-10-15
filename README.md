@@ -4,10 +4,10 @@ safeappend
 Stata command to _append, force_ without destroying data
 
 ## Description 
-__safeappend__ acts like {hi:append, force} except that it does
-{it:NOT} destroy information if the variable in {it:master} has a different 
-type than {it:using}. Instead, in the case of a string-numeric conflict, 
-the numeric variable is {help tostring}ed.
+__safeappend__ acts like __append, force__ except that it does
+_NOT_ destroy information if the variable in _master_ has a different 
+type than _using_. Instead, in the case of a string-numeric conflict, 
+the numeric variable is _tostring_ed.
 
 ## Syntax
 __safeappend__ using _filename_
