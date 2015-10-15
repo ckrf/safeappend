@@ -12,5 +12,7 @@ type than _using_. Instead, in the case of a string-numeric conflict, __tostring
 __safeappend__ using _filename_
 
 ## Installation
-Use __sysdir__ to find your personal ado folder. Move _safeappend.do_ to that folder.
+Use __sysdir__ to find your personal ado folder. Move _safeappend.ado_ to that folder.
+
+Move _safeappend.sthlp_ to your personal ado folder if you want to install the online help file, e.g., __help safeappend__.
 
