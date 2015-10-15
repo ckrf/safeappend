@@ -1,12 +1,11 @@
 *
-* append_post.do: test an approach to safely appending
+* safeappend.ado: append whenever varnames match, but don't delete data
 *
 
 program define safeappend
-    args using
+    syntax using
 
 * -- save current state -- *
-    // TODO: make this safer using tempname, etc properly
 tempfile master
 save `master'
 
@@ -47,7 +46,7 @@ tempfile usingvars
 postfile `postvars' str32 varname str7 usingtype using `usingvars'
 
 * loop and post
-use "`using'"
+use `using'
 local usingtype "" // string or numeric
 foreach var of varlist _all {
     capture confirm numeric variable `var'
@@ -90,7 +89,7 @@ do `tostring_master'
 save `master_safe'
 
 tempfile using_safe
-use "`using'", clear
+use `using', clear
 do `tostring_using'
 save `using_safe'
 

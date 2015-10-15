@@ -29,10 +29,10 @@ save demo/using_demo, replace
 save "demo/using demo spaces", replace
 
 use demo/master_demo, clear
-safeappend demo/using_demo
+safeappend using "demo/using_demo"
 list
 pause
 
-safeappend "demo/using demo spaces"
+safeappend using "demo/using demo spaces"
 list
 pause
