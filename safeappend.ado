@@ -3,6 +3,7 @@
 *
 
 program define safeappend
+    version 12
     syntax using
 
 * -- save current state -- *
