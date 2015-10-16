@@ -2,9 +2,9 @@
 * safeappend.ado: append whenever varnames match, but don't delete data
 *
 
-program define safeappend
+program define safeappend 
     version 12
-    syntax using
+    syntax using [, List ]
 
 quietly { // no output from intermediate commands
 
@@ -73,6 +73,15 @@ use `mastervars'
 merge 1:1 varname using `usingvars', keep(match) 
     // TODO: preserve order of variable names
 drop _merge
+
+* list differences if requested
+if !missing("`list'") {
+noisily {
+    di
+    di "Variables with string/numeric conflict:"
+    list if usingtype != mastertype, noobs ab(10)
+}
+}
 
 * dummy variables if tostringing needed
 gen num_master_only = 1 if mastertype == "numeric" & usingtype == "string"

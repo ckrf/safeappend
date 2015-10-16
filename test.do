@@ -36,3 +36,5 @@ pause
 safeappend using "demo/using demo spaces"
 list
 pause
+
+safeappend using "demo/using_demo", list

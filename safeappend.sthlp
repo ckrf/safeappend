@@ -18,7 +18,7 @@
 {title:Syntax}
 
 {p 8 16 2}
-{hi:safeappend} using {it: {help filename}} 
+{hi:safeappend} using {it: {help filename}} [{cmd:,} {opt l:ist}]
 
 {marker description}{...}
 {title:Description}
@@ -34,7 +34,7 @@ the numeric variable is {help tostring}ed.
 {title:Options}
 
 {phang}
-Not yet implemented.
+{opt list} displays all variables that conflict and their respective type in {it:master} and {it:using}.
 
 {marker examples}{...}
 {title:Examples}
