@@ -6,6 +6,8 @@ program define safeappend
     version 12
     syntax using
 
+quietly { // no output from intermediate commands
+
 * -- save current state -- *
 tempfile master
 save `master'
@@ -100,4 +102,5 @@ save `using_safe'
 use `master_safe'
 append using `using_safe'
 
+} // quietly
 end
