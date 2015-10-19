@@ -4,7 +4,7 @@
 
 program define safeappend 
     version 12
-    syntax using [, List ]
+    syntax using [, List DRYrun]
 
 quietly { // no output from intermediate commands
 
@@ -90,6 +90,7 @@ gen num_using_only = 1 if usingtype == "numeric" & mastertype == "string"
 /*  -------------------------
     "write" programs to tostring master, using, then run the append command
     ------------------------- */
+
 tempfile tostring_using tostring_master
 gen cmd = "tostring " + varname + ", replace"
 outsheet cmd using `tostring_master' if !missing(num_master_only), noq non
@@ -108,8 +109,14 @@ save `using_safe'
 /*  -------------------------
     Actually append
     ------------------------- */
-use `master_safe'
-append using `using_safe'
+if missing("`dryrun'") {
+    use `master_safe'
+    append using `using_safe'
+}
+else {
+    * restore initial dataset
+    use `master'
+}
 
 } // quietly
 end

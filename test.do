@@ -37,4 +37,4 @@ safeappend using "demo/using demo spaces"
 list
 pause
 
-safeappend using "demo/using_demo", list
+safeappend using "demo/using_demo", list dry

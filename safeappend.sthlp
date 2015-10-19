@@ -18,7 +18,7 @@
 {title:Syntax}
 
 {p 8 16 2}
-{hi:safeappend} using {it: {help filename}} [{cmd:,} {opt l:ist}]
+{hi:safeappend} using {it: {help filename}} [{cmd:,} {opt l:ist} {opt dry:run}]
 
 {marker description}{...}
 {title:Description}
@@ -35,6 +35,9 @@ the numeric variable is {help tostring}ed.
 
 {phang}
 {opt list} displays all variables that conflict and their respective type in {it:master} and {it:using}.
+
+{phang}
+{opt dryrun} shows output from running {hi:safeappend} but does not alter the dataset. There is no reason to specify {hi:dryrun} without specifying other options such as {hi:list}.
 
 {marker examples}{...}
 {title:Examples}
