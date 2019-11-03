@@ -10,7 +10,7 @@ quietly { // no output from intermediate commands
 
 * -- save current state -- *
 tempfile master
-save `master'
+save `master', emptyok
 
 /*  -------------------------
     Loop over master dataset and post varnames and types
@@ -99,12 +99,12 @@ outsheet cmd using `tostring_using' if !missing(num_using_only), noq non
 tempfile master_safe
 use `master', clear
 do `tostring_master'
-save `master_safe'
+save `master_safe', emptyok
 
 tempfile using_safe
 use `using', clear
 do `tostring_using'
-save `using_safe'
+save `using_safe', emptyok
 
 /*  -------------------------
     Actually append
