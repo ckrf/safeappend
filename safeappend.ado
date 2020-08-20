@@ -67,7 +67,7 @@ postclose `postvars'
 clear
 
 /*  -------------------------
-    Merge posted datasets for using and master
+    Merge posted variable type lists for using and master
     ------------------------- */
 use `mastervars' 
 merge 1:1 varname using `usingvars', keep(match) 
@@ -88,7 +88,8 @@ gen num_master_only = 1 if mastertype == "numeric" & usingtype == "string"
 gen num_using_only = 1 if usingtype == "numeric" & mastertype == "string"
 
 /*  -------------------------
-    "write" programs to tostring master, using, then run the append command
+    "write" programs to tostring master, using, then run those programs on each
+    dataset 
     ------------------------- */
 
 tempfile tostring_using tostring_master
