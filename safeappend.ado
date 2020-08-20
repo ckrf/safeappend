@@ -2,15 +2,46 @@
 * safeappend.ado: append whenever varnames match, but don't delete data
 *
 
+capture program drop safeappend 
 program define safeappend 
     version 12
-    syntax using [, List DRYrun]
+    syntax using/ [, List DRYrun DECODE]
 
 quietly { // no output from intermediate commands
+// noisily { // all output from intermediate commands
 
 * -- save current state -- *
 tempfile master
 save `master', emptyok
+
+* get a copy of using that I can write to 
+tempfile usingtmp 
+use "`using'"
+save "`usingtmp'"
+clear
+
+/*  -------------------------
+    Loop over master and using datasets to do any required data cleaning
+    ------------------------- */
+foreach dta in master usingtmp {
+	use ``dta''
+	foreach var of varlist _all {
+
+		* replace all labeled variables with their value label string
+		if !missing("`decode'") {
+			tempvar decoded 
+			capture decode `var', gen(`decoded')
+			if !_rc {
+				drop `var'
+				rename `decoded' `var'
+			}
+
+		}
+	}
+	save ``dta'', emptyok replace
+	clear
+}
+
 
 /*  -------------------------
     Loop over master dataset and post varnames and types
@@ -49,7 +80,7 @@ tempfile usingvars
 postfile `postvars' str32 varname str7 usingtype using `usingvars'
 
 * loop and post
-use `using'
+use `usingtmp'
 local usingtype "" // string or numeric
 foreach var of varlist _all {
     capture confirm numeric variable `var'
@@ -103,7 +134,7 @@ do `tostring_master'
 save `master_safe', emptyok
 
 tempfile using_safe
-use `using', clear
+use `usingtmp', clear
 do `tostring_using'
 save `using_safe', emptyok
 
@@ -112,7 +143,13 @@ save `using_safe', emptyok
     ------------------------- */
 if missing("`dryrun'") {
     use `master_safe'
-    append using `using_safe'
+    capture append using `using_safe'
+    if _rc == 106 {
+    	display as error "could not convert all non-matching numeric variables to string."
+    	di as err "This can happen when there are numberic variables with value labels."
+    	di as err "Consider using the 'decode' option."
+    	exit 106
+    }
 }
 else {
     * restore initial dataset

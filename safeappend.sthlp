@@ -39,9 +39,12 @@ the numeric variable is {help tostring}ed.
 {phang}
 {opt dryrun} shows output from running {hi:safeappend} but does not alter the dataset. There is no reason to specify {hi:dryrun} without specifying other options such as {hi:list}.
 
+{phang}
+{opt decode} replaces all categorical variables with a string variable containing the value label for each observation. {opt decode}
+
 {marker examples}{...}
 {title:Examples}
 
 {pstd} 
-See the test "suite" {hi:test.do} in the Github repository
+See the test "suite" {hi:test.do} in the {browse "https://github.com/ckrf/safeappend":GitHub repository}.
 

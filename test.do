@@ -35,15 +35,16 @@ replace fizz = "false" if fizz != "yes"
 save demo/using_demo, replace
 save "demo/using demo spaces", replace
 
-* test safeappend behavior without spaces in the filename
 use demo/master_demo, clear
-safeappend using "demo/using_demo"
+safeappend using "demo/using_demo", list dry
+
+* test safeappend behavior without spaces in the filename
+safeappend using "demo/using_demo", decode
 list
 pause
 
 * test safeappend behavior with spaces in the filename
-safeappend using "demo/using demo spaces"
+safeappend using "demo/using demo spaces", decode
 list
 pause
 
-safeappend using "demo/using_demo", list dry
